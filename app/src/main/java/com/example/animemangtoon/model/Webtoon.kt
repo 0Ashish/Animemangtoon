@@ -9,21 +9,17 @@ data class Webtoon(
     val imageUrl: String,
     val description: String
 ) : Parcelable {
-    // Constructor for Parcel
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: ""
     )
 
-    // Write object properties to the Parcel
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(title)
         parcel.writeString(imageUrl)
         parcel.writeString(description)
     }
-
-    // This is required for the Parcelable interface, usually returns 0
     override fun describeContents(): Int = 0
 
     companion object CREATOR : Parcelable.Creator<Webtoon> {

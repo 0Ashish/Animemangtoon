@@ -21,10 +21,9 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        // Initialize the database
         database = AppDatabase.getDatabase(this)
 
-        // Retrieve the Webtoon object from the intent
+        // Retrieve webtoon from intent
         val webtoon = intent.getParcelableExtra<Webtoon>("webtoon")
 
         // Initialize views
@@ -33,23 +32,22 @@ class DetailActivity : AppCompatActivity() {
         val detailDescription = findViewById<TextView>(R.id.detailDescription)
         val buttonAddToFavorites = findViewById<Button>(R.id.buttonAddToFavorites)
 
-        // Check if the webtoon object is not null
+
         webtoon?.let {
-            // Set data to the views
             detailTitle.text = it.title
             detailDescription.text = it.description
             Glide.with(this).load(it.imageUrl).into(detailImage)
 
-//             Handle adding to favorites
+//              adding to favorites
             buttonAddToFavorites.setOnClickListener {
                 webtoon?.let { webtoon ->
                     if (webtoon.title.isNotEmpty() && webtoon.imageUrl.isNotEmpty() && webtoon.description.isNotEmpty()) {
                         val favorite = Favorite(webtoon.title, webtoon.imageUrl, webtoon.description)
                         lifecycleScope.launch {
-                            // Insert the webtoon into the favorites table
+                            // Inserting  webtoon into the favorites table
                             database.favoriteDao().insert(favorite)
 
-                            // Show a Toast after the item is added to favorites
+                            // Show a Toast for adding into favorites
                             runOnUiThread {
                                 Toast.makeText(this@DetailActivity, "${webtoon.title} added to favorites", Toast.LENGTH_SHORT).show()
                             }
@@ -61,7 +59,6 @@ class DetailActivity : AppCompatActivity() {
             }
 
         } ?: run {
-            // Handle the case where webtoon is null (e.g., show a toast or log)
             detailTitle.text = "No data available"
         }
     }

@@ -25,7 +25,7 @@ class WebtoonAdapter(
         fun bind(webtoon: Webtoon) {
             title.text = webtoon.title
             descriptionTextView.text = webtoon.description
-            // Load image from URL using Glide or Coil
+//            loading image
             Glide.with(itemView.context).load(webtoon.imageUrl).into(image)
 
             itemView.setOnClickListener { onClick(webtoon) }
@@ -34,21 +34,14 @@ class WebtoonAdapter(
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WebtoonViewHolder {
-//        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_webtoon, parent, false)
-//        return WebtoonViewHolder(view)
-
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_webtoon, parent, false)
         return WebtoonViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: WebtoonViewHolder, position: Int) {
-//        val webtoon = webtoons[position]
-//        holder.title.text = webtoon.title
-//        Glide.with(holder.itemView.context).load(webtoon.imageUrl).into(holder.image)
-//        holder.itemView.setOnClickListener { onClick(webtoon) }
-
         holder.bind(webtoons[position])
     }
+
     override fun getItemCount() = webtoons.size
 
     fun getItemAtPosition(position: Int): Webtoon {

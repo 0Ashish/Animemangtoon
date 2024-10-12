@@ -24,15 +24,11 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-//
-//        val webtoons = listOf(
-//            Webtoon("Webtoon Title 1", "image_url_1", "Brief description 1"),
-//            Webtoon("Webtoon Title 2", "image_url_2", "Brief description 2")
-//        )
+
 
         adapter = WebtoonAdapter(webToonList) { webtoon ->
             val intent = Intent(this, DetailActivity::class.java).apply {
-                putExtra("webtoon", webtoon) // Passing the Webtoon object with the correct key
+                putExtra("webtoon", webtoon)
             }
             startActivity(intent)
         }

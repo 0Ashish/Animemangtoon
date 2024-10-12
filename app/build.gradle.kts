@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("androidx.room") version "2.6.1" apply false
-    id("com.google.devtools.ksp") // Apply KSP here
+    id("com.google.devtools.ksp")
      }
 
 
@@ -47,7 +47,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1" // Consider updating to the latest version if necessary
+        kotlinCompilerExtensionVersion = "1.5.1"
     }
 
     packaging {
@@ -78,13 +78,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     //Room dependencies
-//    implementation("androidx.room:room-runtime:2.6.1")
-//    ksp("androidx.room:room-compiler:2.6.1")
-//    implementation("androidx.room:room-ktx:2.6.1")
-
     implementation(libs.androidx.room.runtime)
-    ksp(libs.androidx.room.compiler) // Use KSP for Room compiler
-    implementation(libs.androidx.room.ktx) // Use Room KTX for coroutines support
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
 
     // Glide
     implementation (libs.glide)
